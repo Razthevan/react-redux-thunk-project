@@ -1,9 +1,17 @@
-import React from 'react';
-import { render } from '@testing-library/react';
-import App from './App';
+import React from "react";
+import { render } from "@testing-library/react";
+import App from "./App";
 
-test('renders learn react link', () => {
-  const { getByText } = render(<App />);
-  const linkElement = getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+jest.mock("./components/Campaigns", () => () => <p>Campaigns</p>);
+jest.mock("./components/Header", () => () => <p>Header</p>);
+
+describe("App.js - basic behaviour", () => {
+  it("Renders the Campaigns and Header components", () => {
+    const { getByText } = render(<App />);
+    const campaigns = getByText("Campaigns");
+    const header = getByText("Header");
+
+    expect(campaigns).toBeInTheDocument();
+    expect(header).toBeInTheDocument();
+  });
 });
