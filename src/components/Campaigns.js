@@ -12,8 +12,8 @@ const ALL_CAMPAIGNS = "all";
 
 const propTypes = {
   theme: PropTypes.object,
+  error: PropTypes.string,
   campaigns: PropTypes.array,
-  error: PropTypes.string.isRequired,
   isFetching: PropTypes.bool.isRequired,
   fetchCampaigns: PropTypes.func.isRequired,
 };
@@ -52,7 +52,7 @@ export const Campaigns = ({
       </CampaignsContainer>
     );
   }
-  if (error) {
+  if (error || !campaigns.length) {
     return (
       <CampaignsContainer>
         <Heading>
@@ -86,7 +86,7 @@ export const Campaigns = ({
 
       <CampaignsWrapper>
         {campaignsToRender.map((campaign, i) => (
-          <Campaign key={campaign.id + Math.random()} campaign={campaign} />
+          <Campaign key={campaign.id} campaign={campaign} />
         ))}
       </CampaignsWrapper>
     </CampaignsContainer>
